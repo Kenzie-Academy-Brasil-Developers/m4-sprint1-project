@@ -1,5 +1,6 @@
 import express from "express";
 import { createTodo, getTodoById, getTodos } from "./logic";
+import { validation } from "./middlewares/validation";
 
 const app = express();
 
@@ -9,7 +10,7 @@ app.get("/", getTodos);
 
 app.get("/:todoId", getTodoById);
 
-app.post("/", createTodo);
+app.post("/", validation, createTodo);
 
 const PORT = 3000;
 
