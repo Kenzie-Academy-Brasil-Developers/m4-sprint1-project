@@ -1,12 +1,11 @@
-import express, { Request, Response } from "express";
+import express from "express";
+import { getTodos } from "./logic";
 
 const app = express();
 
 app.use(express.json());
 
-app.get("/", (req: Request, res: Response) => {
-    return res.status(200).json({ message: "Hello world!"});
-})
+app.get("/", getTodos);
 
 const PORT = 3000;
 
