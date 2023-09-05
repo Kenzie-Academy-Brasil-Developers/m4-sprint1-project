@@ -1,6 +1,7 @@
 import express from "express";
 import { createTodo, getTodoById, getTodos } from "./logic";
 import { validation } from "./middlewares/validation";
+import { createTodoValidation } from "./schemas/createTodoValidation";
 
 const app = express();
 
@@ -10,7 +11,7 @@ app.get("/", getTodos);
 
 app.get("/:todoId", getTodoById);
 
-app.post("/", validation, createTodo);
+app.post("/", validation(createTodoValidation), createTodo);
 
 const PORT = 3000;
 

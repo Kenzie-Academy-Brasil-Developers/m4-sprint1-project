@@ -1,20 +1,19 @@
 import { Request, Response, NextFunction } from "express";
 
-export const validation = () => {
-    return (req: Request, res: Response, next: NextFunction) => {
-    const errors = [];
+export const validation =
+   (validations: any) => (req: Request, res: Response, next: NextFunction) => {
+      const errors: string[] = [];
 
-    if(!req.body.title){
-        errors.push("Title is required");
-    }
+      Object.entries(validations).forEach((validation) => {
+         const [key, value] = validation;
+         if (value === "required") {
+            if (!req.body[key]) errors.push(`${key} is required`);
+         }
+      });
 
-    if(!req.body.content){
-        errors.push("Content is required");
-    }
+      if (errors.length > 0) {
+         return res.status(422).json({ errors });
+      }
 
-    if(errors.length > 0){
-        return res.status(422).json({ errors });
-    }
-
-    return next();
-}}
+      return next();
+   };
