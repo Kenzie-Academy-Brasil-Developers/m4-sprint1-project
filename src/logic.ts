@@ -14,7 +14,7 @@ export const createTodo = (req: Request, res: Response) => {
     const newTodo = { id: uuidv4(), title: req.body.title, content: req.body.content };
     todoDatabase.push(newTodo);
 
-    return res.status(201).json({ message: "Todo sucessfully created.", todo: newTodo});
+    return res.status(201).json({ message: "Todo sucessfully created", todo: newTodo});
 }
 
 export const deleteTodo = (req: Request, res: Response) => {
